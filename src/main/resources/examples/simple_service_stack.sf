@@ -1,0 +1,78 @@
+#
+# "simple_services_stack.sf"
+# (M. Simpson, 3/25/2015)
+#
+
+stratiform_template:
+
+  template_version     | "2010-09-09"
+  template_description | "Simple service stack."
+
+  parameters:
+
+    string :: service_label       | "ssvc"
+    string :: service_description | "Simple Service"
+    cidr   :: vpc_cidr            | "10.0.0.0/16"
+    cidr   :: vpc_subn_a_cidr     | "10.0.0.0/24"
+    string :: vpc_subn_a_az       | "us-west-1a"
+    cidr   :: vpc_subn_b_cidr     | "10.0.1.0/24"
+    string :: vpc_subn_b_az       | "us-west-1b"
+    cidr   :: vpc_subn_c_cidr     | "10.0.2.0/24"
+    string :: vpc_subn_c_az       | "us-west-1c"
+
+  resources:
+
+    vpc :: simple_service_virtual_private_cloud
+
+      name        | "{{ service_label }}-vpc"
+      description | "{{ service_description }} Virtual Private Cloud"
+      properties:
+        cidr_block | "{{ vpc_cidr }}"
+
+    rtbl :: simple_service_virtual_private_cloud_route_table
+
+      name        | "{{ service_label }}-vpc-rtbl"
+      description | "{{ service_description }} Virtual Private Cloud Route Table"
+      properties:
+        vpc_id | "{{ simple_service_virtual_private_cloud }}"
+        
+    nacl :: simple_service_virtual_private_cloud_network_acl
+
+      name        | "{{ service_label }}-vpc-nacl"
+      description | "{{ service_description }} Virtual Private Cloud Network ACL"
+      properties:
+        vpc_id | "{{ simple_service_virtual_private_cloud }}"
+        
+    subnet :: simple_service_virtual_private_cloud_subnet_a
+
+      name        | "{{ service_label }}-vpc-subn-a"
+      description | "{{ service_description }} Virtual Private Cloud Zone A Subnet"
+      properties:
+        vpc_id            | "{{ simple_service_virtual_private_cloud }}"
+        route_table_id    | "{{ simple_service_virtual_private_cloud_route_table }}"
+        network_acl_id    | "{{ simple_service_virtual_private_cloud_network_acl }}"
+        availability_zone | "{{ vpc_subn_a_az }}"
+        cidr_block        | "{{ vpc_subn_a_cidr }}"
+
+    subnet :: simple_service_virtual_private_cloud_subnet_b
+
+      name        | "{{ service_label }}-vpc-subn-b"
+      description | "{{ service_description }} Virtual Private Cloud Zone B Subnet"
+      properties:
+        vpc_id            | "{{ simple_service_virtual_private_cloud }}"
+        route_table_id    | "{{ simple_service_virtual_private_cloud_route_table }}"
+        network_acl_id    | "{{ simple_service_virtual_private_cloud_network_acl }}"
+        availability_zone | "{{ vpc_subn_b_az }}"
+        cidr_block        | "{{ vpc_subn_b_cidr }}"
+
+    subnet :: simple_service_virtual_private_cloud_subnet_c
+
+      name        | "{{ service_label }}-vpc-subn-c"
+      description | "{{ service_description }} Virtual Private Cloud Zone C Subnet"
+      properties:
+        vpc_id            | "{{ simple_service_virtual_private_cloud }}"
+        route_table_id    | "{{ simple_service_virtual_private_cloud_route_table }}"
+        network_acl_id    | "{{ simple_service_virtual_private_cloud_network_acl }}"
+        availability_zone | "{{ vpc_subn_c_az }}"
+        cidr_block        | "{{ vpc_subn_c_cidr }}"
+        
