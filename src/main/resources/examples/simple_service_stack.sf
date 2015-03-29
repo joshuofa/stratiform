@@ -35,14 +35,14 @@ stratiform_template:
       description | "{{ service_description }} Virtual Private Cloud Route Table"
       properties:
         vpc_id | "{{ simple_service_virtual_private_cloud }}"
-        
+
     nacl :: simple_service_virtual_private_cloud_network_acl
 
       name        | "{{ service_label }}-vpc-nacl"
       description | "{{ service_description }} Virtual Private Cloud Network ACL"
       properties:
         vpc_id | "{{ simple_service_virtual_private_cloud }}"
-        
+
     subnet :: simple_service_virtual_private_cloud_subnet_a
 
       name        | "{{ service_label }}-vpc-subn-a"
@@ -75,4 +75,3 @@ stratiform_template:
         network_acl_id    | "{{ simple_service_virtual_private_cloud_network_acl }}"
         availability_zone | "{{ vpc_subn_c_az }}"
         cidr_block        | "{{ vpc_subn_c_cidr }}"
-        

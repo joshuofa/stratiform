@@ -52,7 +52,7 @@ STRING : '"' ( '\\"' | . )*? '"' ;
 
 // parser rules
 
-stackTemplate : START_TEMPLATE 
+stackTemplate : START_TEMPLATE
                 stackPreamble
                 stackParameters
                 stackResources
@@ -61,7 +61,7 @@ stackTemplate : START_TEMPLATE
 stackPreamble : templateVersion
                 templateDescription
                 ;
-                
+
 templateVersion : TEMPLATE_VERSION HAS_VALUE STRING ;
 
 templateDescription : TEMPLATE_DESCRIPTION HAS_VALUE STRING ;
@@ -73,59 +73,59 @@ parameterDefinition : PARAMETER_TYPE REFERENCED_AS REFERENCE HAS_VALUE STRING ;
 stackResources : START_RESOURCES resourceDefinition+ ;
 
 resourceDefinition : ( vpcResourceDefinition
-					 | routeTableResourceDefinition
-					 | networkAclResourceDefinition
-					 | subnetResourceDefinition
-					 ) ;
+           | routeTableResourceDefinition
+           | networkAclResourceDefinition
+           | subnetResourceDefinition
+           ) ;
 
 vpcResourceDefinition : vpcResourceDeclaration
-						resourceName
-						resourceDescription
-						vpcResourceProperties
-						;
+            resourceName
+            resourceDescription
+            vpcResourceProperties
+            ;
 
 vpcResourceDeclaration : VPC_RESOURCE_TYPE REFERENCED_AS REFERENCE ;
 
 vpcResourceProperties : START_PROPERTIES
-						cidrBlockProperty ;
+            cidrBlockProperty ;
 
 routeTableResourceDefinition : routeTableResourceDeclaration
-				  			   resourceName
-							   resourceDescription
-							   routeTableResourceProperties
-							   ;
+                   resourceName
+                 resourceDescription
+                 routeTableResourceProperties
+                 ;
 
 routeTableResourceDeclaration : ROUTE_TABLE_RESOURCE_TYPE REFERENCED_AS REFERENCE ;
 
 routeTableResourceProperties : START_PROPERTIES
-							   vpcIdProperty ;
+                 vpcIdProperty ;
 
 networkAclResourceDefinition : networkAclResourceDeclaration
-				  			   resourceName
-							   resourceDescription
-							   networkAclResourceProperties
-							   ;
+                   resourceName
+                 resourceDescription
+                 networkAclResourceProperties
+                 ;
 
 networkAclResourceDeclaration : NETWORK_ACL_RESOURCE_TYPE REFERENCED_AS REFERENCE ;
 
 networkAclResourceProperties : START_PROPERTIES
-							   vpcIdProperty ;
+                 vpcIdProperty ;
 
 subnetResourceDefinition : subnetResourceDeclaration
-				  		   resourceName
-						   resourceDescription
-						   subnetResourceProperties
-						   ;
+                 resourceName
+               resourceDescription
+               subnetResourceProperties
+               ;
 
 subnetResourceDeclaration : SUBNET_RESOURCE_TYPE REFERENCED_AS REFERENCE ;
 
 subnetResourceProperties : START_PROPERTIES
-						   vpcIdProperty
-						   routeTableIdProperty
-						   networkAclIdProperty
-						   availabilityZoneProperty
-						   cidrBlockProperty
-						   ;
+               vpcIdProperty
+               routeTableIdProperty
+               networkAclIdProperty
+               availabilityZoneProperty
+               cidrBlockProperty
+               ;
 
 resourceName : RESOURCE_NAME HAS_VALUE STRING ;
 
