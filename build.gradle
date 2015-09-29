@@ -1,0 +1,16 @@
+apply plugin: 'antlr'
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    antlr "org.antlr:antlr4:4.5" // use ANTLR version 4
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.3.1'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.3.2'
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.2'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.2'
+}
+
