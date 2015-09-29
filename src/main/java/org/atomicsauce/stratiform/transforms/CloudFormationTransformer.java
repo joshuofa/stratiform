@@ -1,6 +1,4 @@
-package org.atomicsauce.stratiform.antlr4.transforms;
-
-import java.io.IOException;
+package org.atomicsauce.stratiform.transforms;
 
 import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -12,6 +10,8 @@ import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 import org.atomicsauce.stratiform.antlr4.StratiformLexer;
 import org.atomicsauce.stratiform.antlr4.StratiformParser;
+
+import java.io.IOException;
 
 public final class CloudFormationTransformer {
     private static final Logger LOG = LogManager.getLogger( CloudFormationTransformer.class.getName() );

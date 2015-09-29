@@ -1,4 +1,15 @@
-package org.atomicsauce.stratiform.antlr4.transforms;
+package org.atomicsauce.stratiform.transforms;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.text.WordUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.atomicsauce.stratiform.antlr4.StratiformBaseListener;
+import org.atomicsauce.stratiform.antlr4.StratiformListener;
+import org.atomicsauce.stratiform.antlr4.StratiformParser.*;
+import org.atomicsauce.stratiform.exceptions.StratiformRuntimeException;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -6,26 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.text.WordUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.atomicsauce.stratiform.antlr4.StratiformBaseListener;
-import org.atomicsauce.stratiform.antlr4.StratiformListener;
-import org.atomicsauce.stratiform.antlr4.StratiformParser.NetworkAclResourceDefinitionContext;
-import org.atomicsauce.stratiform.antlr4.StratiformParser.ParameterDefinitionContext;
-import org.atomicsauce.stratiform.antlr4.StratiformParser.RouteTableResourceDefinitionContext;
-import org.atomicsauce.stratiform.antlr4.StratiformParser.StackParametersContext;
-import org.atomicsauce.stratiform.antlr4.StratiformParser.StackResourcesContext;
-import org.atomicsauce.stratiform.antlr4.StratiformParser.SubnetResourceDefinitionContext;
-import org.atomicsauce.stratiform.antlr4.StratiformParser.TemplateDescriptionContext;
-import org.atomicsauce.stratiform.antlr4.StratiformParser.TemplateVersionContext;
-import org.atomicsauce.stratiform.antlr4.StratiformParser.VpcResourceDefinitionContext;
-import org.atomicsauce.stratiform.exceptions.StratiformRuntimeException;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 public final class CloudFormationListener extends StratiformBaseListener
         implements StratiformListener {

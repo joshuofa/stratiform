@@ -1,5 +1,9 @@
 grammar Stratiform;
 
+@header {
+package org.atomicsauce.stratiform.antlr4;
+}
+
 // lexer rules
 
 COMMENT : '#' ~[\r\n]* -> skip ;
